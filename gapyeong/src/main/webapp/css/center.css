@@ -1,0 +1,500 @@
+.wrap{
+    max-width: 1024px;
+    width: 100%;
+    margin: 0 auto;
+}
+.header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 101px;
+    background-color: #264e29;
+    border-radius: 0 0 30px 30px;
+}
+.header h1{
+    width: 216px;
+    height: 56px;
+}
+.header h1 a{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.header h1 a img{
+    width: 100%;
+}
+
+/* 콘텐츠 #308F3A*/
+.contents{
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+.contents h2{
+    margin: 42px 0 66px 0;
+}
+.contents > p{
+    font-size: 18px;
+    color: #333;
+} 
+.contents form{
+    width: 100%;
+}
+.info-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 19px 10px 32px 10px;
+}
+.info-box input{
+    max-width: 344px;
+    width: 85%;
+    height: 61px;
+    border-radius: 30.5px;
+    border: solid 1px #d4d4d4;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    font-family: var(--fn-sans);
+    text-align: center;
+    color: #333;
+    background-color: #fff;
+}
+.info-box input:first-child{
+    margin-bottom: 20px;
+}
+.info-box input::placeholder{
+    font-family: var(--fn-sans);
+    font-size: 18px;
+    color: #b7b7b7;
+}
+.info-box input:focus{
+    outline: none !important;
+    border-color: #308f3a;
+}
+.info-box input:valid{
+    border:1px solid #308f3a !important;
+}
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #fff inset;
+}
+.choice{
+    display: flex;
+    justify-content: center;
+}
+.choice1{
+    margin-right: 18px;
+}
+.choice1, .choice2{
+    display: flex;
+    align-items: center;
+}
+.choice label{
+    font-size: 18px;
+    color: #6b6b6b;
+}
+.choice input[type=radio]{
+	position: relative;
+	appearance: none;
+	background: none;
+	width: 16px;
+	height: 16px;
+    margin-right: 10px;
+	border-radius: 50%;
+	accent-color: #d4d4d4;
+	border: 1px solid #d4d4d4;
+	cursor: pointer;
+}
+.choice input[type='radio']:before {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+    content:'';
+    display:block;
+    width: 10px;
+    height: 10px;
+    border-radius:50%;  
+}
+.choice input[type='radio']:checked:before {
+    background:#308f3a;
+}
+.button-wrap{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 44px 0 20px 0;
+}
+.login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 344px;
+    width: 80%;
+    height: 61px;
+    border-radius: 8px;
+    background-color: #308f3a;
+    font-family: var(--fn-sans);
+    font-size: 18px;
+    color: #fff;
+}
+.contents >p.noti{
+    width: 80%;
+    margin: 0 auto 152px;
+    font-size: 16px;
+    letter-spacing: -0.8px;
+    text-align: center;
+    line-height: 1.2;
+    color: #f00;
+}
+
+/* 로그인 후 헤더 */
+.header.after{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 101px;
+    background-color: #308f3a;
+    border-radius: 0 0 0 0;
+}
+.myInfo{
+	padding-bottom: 22px;
+	background-color: #308f3a;
+	color: #fff;
+}
+.myName{
+	font-size: 23px;
+  	font-weight: 500;
+}
+.myName span{
+	font-size: 28px;
+  	font-weight: bold;
+}
+.myPhone{
+	padding: 10px 0 24px 0;
+	font-size: 18px;
+	color: rgba(255, 255, 255, 0.35);
+}
+.myInfo a{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 207px;
+ 	height: 35px;
+ 	margin: 0 auto;
+ 	background-color: rgba(255, 255, 255, 0.18);
+ 	border-radius: 17.5px;
+}
+
+.bottomCont{
+	position: relative;
+}
+.bottomCont::after{
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -1;
+	content: "";
+	display: block;
+	width: 100%;
+	height: 84px;
+	background-color: #308f3a;
+}
+.fa-angle-right{
+	padding: 3px 0 0 7px;
+}
+.logout{
+	padding: 62px 0 49px 0;
+	font-size: 18px;
+	color: #a1a1a1;
+	font-family: var(--fn-sans);
+}
+.logout.my{
+	padding: 62px 0 80px 0;
+}
+/* 주의사항 */
+#slider{
+    position: relative;
+    max-width: 349px;
+    width: 85%;
+    max-height: 349px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+#slider ul {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+#slider ul li {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+#slider ul li img{
+    max-width: 349px;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    aspect-ratio: 1/1;
+}
+.bottomCont > p.noti2{
+    padding: 24px 0 36px 0;
+    line-height: 1.2;
+}
+.button-wrap.up{
+    padding: 0 0 85px 0;
+}
+.login.up{
+	background-color: #d4d4d4;
+}
+.login.up.active{
+    background-color: #308f3a;
+}
+
+/* 이미지 업로드 */
+.bottomCont.upload{
+	
+}
+.formWrap{
+    display: grid;
+    grid-template-columns: repeat(2, 44%);
+    grid-gap: 10px;
+    justify-content: center;
+    max-width: 379px;
+    margin: 0 auto;
+	
+}
+.formWrap form{
+	width: 165px;
+	height: 165px;
+	overflow: hidden;
+}
+.images{
+    position: relative;
+    width: 100%;
+    height: 165px;
+    overflow: hidden;
+}
+.images img{
+    width: 100%;
+    max-width: 165px;
+    height: 100%;
+    max-height: 165px;
+    object-fit: fill;
+    aspect-ratio: 1/1;
+}
+.upload-btn{
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+.images input{
+    display: none;
+}
+.bottomCont > p.uploadDesc {
+    padding: 27px 0 62px 0;
+}
+
+/* 마이페이지 */
+.myText{
+    display: flex;
+    align-items: flex-end;
+    max-width: 349px;
+    width: 85%;
+    margin: 0 auto;
+    text-align: left;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: -0.9px;
+    color: #333;
+}
+.myText.text1{
+    padding: 0 0 8px 0;
+}
+.myText.text2{
+    padding: 0 0 0 0;
+}
+.myText p{
+    padding-left: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: -0.7px;
+    color: #308f3a;
+}
+.myText p span{
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+.button-wrap.up.my{
+    padding: 36px 0 50px 0;
+}
+.reciptList{
+    display: grid;
+    grid-template-columns: repeat(2, 44%);
+    justify-content: center;
+    width: 85%;
+    grid-gap: 20px;
+    justify-content: center;
+    max-width: 356px;
+    width: 85%;
+    margin: 0 auto;
+}
+.recipt{
+    position: relative;
+    width: 100%;
+    height: 165px;
+    overflow: hidden;
+}
+.recipt > img{
+    width: 100%;
+    height: 100%;
+    max-height: 165px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+}
+.recipt p{
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    background-color: rgba(51, 51, 51, 0.8);
+    font-size: 14px;
+    color: #fff;
+}
+.recipt p.accept{
+	background-color: transparent;
+}
+.recipt p.decline{
+	background-color: transparent;
+}
+.recipt p img{
+	width: 100%;
+}
+/* 모달 */
+.modal{
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 99;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.65);
+}
+.modal button{
+    position: absolute;
+    top: 34px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 34px;
+    height: 34px;
+    border: 1px solid #fff;
+    border-radius: 50%;
+}
+.modalImg img{
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+
+.bottomCont > p.uploadDesc.conDesc{
+    padding: 0 0 0 0;
+    line-height: 1.2;
+    font-size: 14px;
+}
+.contents > p.uploadDesc.conDesc {
+    padding: 40px 0 0 0;
+    line-height: 1.2;
+    font-size: 14px;
+}
+.talk{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 20px;
+	font-size: 14px;
+	text-decoration-line: underline;
+}
+.talk img{
+	width: 25px;
+	margin: 5px 3px 0 0;
+}
+
+.modalImg{
+    position: absolute;
+    top: 105px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    max-width: 360px;
+    max-height: 366px;
+    height: 100%;
+    padding: 20px 17px 30px 17px;
+    background-color: #fff;
+    overflow-y: scroll;
+    font-family: var(--fn-suit);
+}
+.modalImg > p{
+    padding-bottom: 14.5px;
+    font-weight: bold;
+}
+.reciptInfo{
+    width: 100%;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+}
+.reciptInfo li{
+    display: grid;
+    grid-template-columns: 35% 65%;
+    text-align:left;
+}
+.reciptInfo li:nth-child(-n + 4){
+    border-bottom: 1px solid #eaeaea;
+}
+.reciptInfo li p{
+    padding: 13px 0 13px 10px;
+    font-size: 14px;
+}
+.reciptInfo li p:first-child{
+    font-weight: 600;
+}
+.reciptInfo li p:last-child{
+    border-left: 1px solid #eaeaea;
+}
+.totalPrice{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 11.5px 5px 0 10px;
+}
+.totalTit{
+    font-size: 14px;
+    font-weight: 600;
+}
+.Totalamount{
+    font-size: 18px;
+    font-weight: bold;
+}
+.Totalamount > span{
+    margin-left: 2px;
+    font-size: 12px;
+    font-weight: 600;
+}

@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pict_admin.service.impl.PictMapper">
+	<select id="board_list" resultType="pictVO">
+		select idx, title, text, date_format(reg_date, "%Y-%m-%d") as reg_date_for, news, board_type from board_master
+		where 1=1 
+		<if test="search_text != null and search_text != '' ">
+			and 
+			(
+				title LIKE CONCAT('%', #{search_text}, '%')
+			) 
+		</if>
+		<if test="board_type != null and board_type != '' and board_type != 0">
+			and board_type =#{board_type}
+		</if>
+		order by reg_date desc
+	</select>
+	
+	<select id="board_list_one" resultType="pictVO">
+		select * from board_master
+		where idx = #{idx}
+	</select>
+	
+	<insert id="board_insert" parameterType="pictVO">
+		INSERT INTO board_master
+			(
+			 title, text, reg_date, board_type, news
+			)
+		VALUES (
+			 #{title}, #{text}, now(), #{board_type}, #{news}
+			  ) 
+	</insert>
+	
+	<update id="board_update" parameterType="pictVO">
+		update board_master
+		set title =#{title}, text=#{text}, reg_date = now(), board_type = #{board_type}, news = #{news}
+		where idx = #{idx}
+	</update>
+
+	
+	<select id="board_list_latest" resultType="pictVO">
+		select * from board_master where board_type = 2 order by reg_date desc limit 1 offset 0;
+	</select>
+	
+	<delete id="board_delete" parameterType="pictVO">
+		delete from board_master where idx = #{idx}
+	</delete>
+	
+	<insert id="bill_insert" parameterType="pictVO" useGeneratedKeys="true" keyProperty="idx">
+		INSERT INTO bill_table
+			(
+			 user_id, name, biz_num, address, confirm_num, date, price, img_url, reg_date, use_at, flag
+			)
+		VALUES (
+			 #{idx}, #{name}, #{biz_num}, #{address}, #{confirm_num}, #{date}, #{price}, #{img_url}, now(), #{use_at}, #{flag}
+			  ) 
+	</insert>
+	
+	<select id="bill_select" resultType="pictVO">
+		select * from bill_table
+		where idx = #{idx}
+	</select>
+	
+	<update id="bill_update" parameterType="pictVO">
+		update bill_table
+		set name = #{name}, biz_num = #{biz_num}, address =#{address}, confirm_num = #{confirm_num}, date=#{date}, price=#{price}, reg_date = now(), use_at = #{use_at}, flag=#{flag}
+		<if test="img_url != null and img_url != '' ">
+			, img_url = #{img_url}
+		</if>
+
+		where idx = #{idx}
+	</update>
+	
+	
+	<select id="test_list" resultType="pictVO">
+		select u.idx as user_idx, u.name, u.pay_method, u.mobile, u.cnt, b.idx, b.name as title, b.biz_num, b.address, b.confirm_num, b.date, b.img_url, b.reg_date, b.use_at
+		, (case when b.price is null then 0 when b.price = '' then 0 else b.price end) as price
+		from user_table u 
+		left outer join bill_table b on b.user_id = u.idx
+		where 1=1
+		<if test="search_text != null and search_text != 'pict'">
+			<if test="search_text != null and search_text != '' ">
+				and (
+					u.name LIKE CONCAT('%', #{search_text}, '%') 
+				) 
+			</if>
+			<if test="search_mobile != null and search_mobile != '' ">
+				and (
+					u.mobile LIKE CONCAT('%', #{search_mobile}, '%') 
+				) 
+			</if>
+		</if>
+		<if test="use_at != null and use_at != '' ">
+			and (
+				use_at = #{use_at} 
+			) 
+		</if>
+	</select>
+	
+	<select id="test_list_one" resultType="pictVO">
+		select * from bill_table where idx = #{idx}
+	</select>
+	
+	<select id="non_list" resultType="pictVO">
+		select * from non_confirm where biz_num =#{biz_num}
+	</select>
+	
+	<select id="confirm_num_list" resultType="pictVO">
+		select * from bill_table where confirm_num = #{confirm_num}
+	</select>
+	
+	<update id="confirm_update" parameterType="pictVO">
+		update bill_table
+		set reg_date = now()
+		<if test="flag != null and flag != '' and flag == 'confirm'">
+			, use_at = '1'
+		</if>
+		
+		<if test="flag != null and flag != '' and flag == 'nonconfirm'">
+			, use_at = '0'
+		</if>
+		
+		<if test="flag != null and flag != '' and flag == 'refuse'">
+			, use_at = '2'
+		</if>
+		where idx = #{idx}
+	</update>
+	
+	<select id="select_user" resultType="pictVO">
+		select * from user_table where name = #{name} and mobile =#{mobile}
+	</select>
+	
+	<insert id="insert_user_info" parameterType="pictVO">
+		INSERT INTO user_table
+			(
+			 name, mobile, ticket, cnt, reg_date, price, pay_method, confirm_num, card_num, gift
+			)
+		VALUES (
+			 #{name}, #{mobile}, #{ticket}, #{cnt}, now(), #{price}, #{pay_method}, #{confirm_num}, #{card_num}, #{gift}
+			  ) 
+	</insert>
+	
+	<update id="update_user_info" parameterType="pictVO">
+		update user_table
+		set reg_date = now()
+		<if test="ticket != null and ticket != ''"> 
+			,ticket = #{ticket}
+		</if>
+		<if test="cnt != null and cnt != ''">
+		 	,cnt = #{cnt}
+		 </if>
+		 <if test="name != null and name != ''">
+		 	,name = #{name}
+		 </if>
+		 <if test="mobile != null and mobile != ''">
+		 	,mobile = #{mobile}
+		 </if>
+		 <if test="text != null and text != ''">
+		 	,text = #{text}
+		 </if>
+		 <if test="price != null and price != ''">
+		 	,price = #{price}
+		 </if>
+		 <if test="pay_method != null and pay_method != ''">
+		 	,pay_method = #{pay_method}
+		 </if>
+		 <if test="confirm_num != null and confirm_num != ''">
+		 	,confirm_num = #{confirm_num}
+		 </if>
+		 <if test="card_num != null and card_num != ''">
+		 	,card_num = #{card_num}
+		 </if>
+		 <if test="gift != null and gift != ''">
+		 	,gift = #{gift}
+		 </if>
+		where idx = #{idx}
+	</update>
+	
+	<select id="non_hospital" resultType="pictVO">
+		select * from non_hospital where title LIKE CONCAT('%', #{name}, '%')
+	</select>
+	
+	<select id="test_user_one" resultType="pictVO">
+		select * from user_table where idx = #{idx}
+	</select>
+	
+	<select id="test_user_list" resultType="pictVO">
+		select * from user_table
+		where 1=1
+		<if test="search_text != null and search_text != '' ">
+			and (
+				name LIKE CONCAT('%', #{search_text}, '%') 
+			) 
+		</if>
+		<if test="search_mobile != null and search_mobile != '' ">
+			and (
+				mobile LIKE CONCAT('%', #{search_mobile}, '%') 
+			) 
+		</if>
+		<if test="search_print != null and search_print != '' ">
+			and (
+				(print = '' or print is null) 
+			) 
+		</if>
+	</select>
+	
+	<!-- 센터 로그인 -->
+	
+	<select id="center_get_user_info" resultType="pictVO">
+		select * from user_table where name =#{name} and mobile=#{mobile}
+	</select>
+	
+	<update id="center_address_update" parameterType="pictVO">
+		update user_table
+		set address= #{address}, address_ty = #{address_ty}
+		where name =#{name} and mobile = #{mobile}
+	</update>
+	
+	<insert id="center_address_insert" parameterType="pictVO" useGeneratedKeys="true" keyProperty="idx">
+		INSERT INTO user_table
+			(
+			 name, mobile, reg_date
+			)
+		VALUES (
+			 #{name}, #{mobile}, now()
+			  ) 
+	</insert>
+	
+	
+	<select id="user_bill_accept" resultType="pictVO">
+		select 
+			ifnull((select count(idx) from bill_table where user_id = #{user_id}) ,0)total_cnt,
+			ifnull((select count(idx) from bill_table where user_id = #{user_id} and use_at = 1 ),0) cnt,
+			ifnull((select sum(price) from bill_table where user_id = #{user_id} and use_at = 1 ), 0) price
+			from bill_table b
+		where b.user_id = #{user_id}
+		group by b.user_id
+	</select>
+	
+	<select id="user_bill_list" resultType="pictVO">
+		select * from bill_table where user_id = #{user_id};
+	</select>
+	
+	<!-- 영수증 출력 -->
+	<select id="bill_info" resultType="pictVO">
+		select u.idx, u.name, u.mobile, sum(b.price) as price , count(u.name) as cnt
+		from user_table u 
+		left outer join bill_table b on b.user_id = u.idx
+		where 1=1
+		and b.use_at = '1'
+		and u.idx = #{idx}
+		group by u.idx
+	</select>
+	
+	<select id="bill_img_list" resultType="pictVO">
+		select
+			b.user_id, u.name, u.mobile, sum(b.price) as price, count(b.price) as cnt
+		from bill_table b
+		left join user_table u on u.idx = b.user_id
+		where b.use_at = '1'
+		<if test="idx != null and idx != '' ">
+			and b.user_id = #{idx} 
+		</if>
+		and u.name is not null
+		group by b.user_id
+		order by cnt desc, name asc
+		
+		#limit 1000 offset 2160
+				
+	</select>
+	<select id="print_person" resultType="pictVO">
+		select idx, user_id, name, biz_num, 
+		address, confirm_num, date, price
+		from bill_table 
+		where user_id = #{user_id} and use_at = 1
+	</select>
+	
+	
+	<update id="bill_print" parameterType="pictVO">
+		update user_table
+		set print = '1'
+		where idx = #{idx}
+	</update>
+	
+	
+	
+</mapper>
